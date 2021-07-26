@@ -1,0 +1,16 @@
+.recordContainer {
+  display: flex;
+  justify-content: center;
+
+  flex-wrap: wrap;
+  height: 75vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.footer {
+  position: fixed;
+  left:0;
+  bottom: 0;
+  text-align: center;
+
+}

@@ -1,0 +1,43 @@
+.header {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: wheat;
+  align-items: center;
+  justify-content: space-between;
+}
+.username,
+.password {
+  display: flex;
+  flex-direction: column;
+}
+.login_popup {
+  min-width: 300px;
+}
+.username input,
+.password input {
+  width: 300px;
+  height: 25px;
+  border-radius: 5px;
+  border: 1px solid;
+  font-size: 15px;
+  color: #0a2d61;
+}
+.username label,
+.password label {
+  margin-bottom: 3px;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  height: 30px;
+}
+/* .buttonContainer > button {
+  width: 100px;
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: 4px;
+} */

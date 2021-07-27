@@ -17,12 +17,14 @@ const Header = ({showPopupMessage,user}) => {
     const [loginPass,setLoginPass]=useState("")
 
     const openSignInForm=()=>{
+      clearLoginForm()
         setSignInForm(true)
     }
     const closeSignInForm=()=>{
         setSignInForm(false)
     }
      const openSignUpForm=()=>{
+      clearSignUpForm();
         setSignUpForm(true)
     }
     const closeSignUpForm=()=>{
@@ -30,6 +32,7 @@ const Header = ({showPopupMessage,user}) => {
     }
 
     const clearSignUpForm=()=>{
+        setdname("")
         setRegUser("")
         setRegPass("")
         setRegconfirmPass("")
@@ -118,11 +121,11 @@ const Header = ({showPopupMessage,user}) => {
                   <Container >
                   <div className="username">
                   <label htmlFor="">Email</label>
-                  <input value={loginEmail} type="text" onChange={(e)=>{setLoginEmail(e.target.value)}} />
+                  <input autoComplete="Off" value={loginEmail} type="text" onChange={(e)=>{setLoginEmail(e.target.value)}} />
                   </div>
                   <div className="password">
                   <label htmlFor="">Password</label>
-                  <input value={loginPass} type="password" onChange={(e)=>{setLoginPass(e.target.value)}} />
+                  <input  autoComplete="Off" value={loginPass} type="password" onChange={(e)=>{setLoginPass(e.target.value)}} />
                   </div>
                   <div className="buttonContainer">
                   
@@ -147,19 +150,19 @@ const Header = ({showPopupMessage,user}) => {
                   <Container >
                   <div className="username">
                   <label htmlFor="">UserName</label>
-                  <input onChange={(e)=>{setdname(e.target.value)}} type="text" />
+                  <input  autoComplete="Off" onChange={(e)=>{setdname(e.target.value)}} type="text" />
                   </div>   
                   <div className="username">
                   <label htmlFor="">Email</label>
-                  <input onChange={(e)=>{setRegUser(e.target.value)}} type="text" />
+                  <input  autoComplete="Off" onChange={(e)=>{setRegUser(e.target.value)}} type="text" />
                   </div>
                   <div className="password">
                   <label htmlFor="">Password</label>
-                  <input onChange={(e)=>{setRegPass(e.target.value)}} type="password" />
+                  <input  autoComplete="Off" onChange={(e)=>{setRegPass(e.target.value)}} type="password" />
                   </div>
                   <div className="password">
                   <label htmlFor="">Confirm Password</label>
-                  <input onChange={(e)=>{setRegconfirmPass(e.target.value)}}  type="password"  />
+                  <input  autoComplete="Off" onChange={(e)=>{setRegconfirmPass(e.target.value)}}  type="password"  />
                   </div>
                   <div className="buttonContainer">
                   

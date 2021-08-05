@@ -120,8 +120,15 @@ useEffect(() => {
        {user?
       dataArray.length ? dataArray.map(({id,cred})=>(
     
-      <Record  showPopupMessage={showPopupMessage} user={user} key={getId(id,1)} id={id} siteName={cred.siteName} username={cred.userName} password={cred.password}/>
-    )):<Alert severity="info">No  Site Found , Create New !</Alert>:<Alert severity="info">Please Login !</Alert> }
+      <Record  showPopupMessage={showPopupMessage} user={user} key={getId(id,1)} id={id} siteName={cred.siteName} siteUrl={cred.siteUrl} username={cred.userName} password={cred.password}/>
+    )):<Alert className='alert_message' severity='info'>
+       No Record Found ! please Create one
+      </Alert>
+      :<Alert className='alert_message' severity='info'>
+        Please Login !
+    </Alert>
+  
+}
     
 
      </div>

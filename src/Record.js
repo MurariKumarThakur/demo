@@ -8,14 +8,23 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import { Container, Button } from "@material-ui/core";
+import validator from "validator";
 import { db } from "./firebase";
 import firebase from "firebase";
-const Record = ({ showPopupMessage, id, siteName, username, password }) => {
+const Record = ({
+  showPopupMessage,
+  id,
+  siteName,
+  siteUrl,
+  username,
+  password,
+}) => {
   const [display, setDisplay] = useState("none");
   const [popupState, setPopupState] = useState(false);
   const [inputSiteName, setSiteName] = useState("");
   const [inputUserName, setUsername] = useState("");
   const [inputPassword, setPassword] = useState("");
+  const [inputSiteUrl, setSiteUrl] = useState("");
   //showing message after clicking on img
   const openUserNameTooltip = () => {
     showPopupMessage("Copied successfylly !", "success", true);
@@ -23,14 +32,30 @@ const Record = ({ showPopupMessage, id, siteName, username, password }) => {
   const openUpdatePopup = () => {
     setPopupState(true);
     setSiteName(siteName);
+    setSiteUrl(siteUrl);
     setUsername(username);
     setPassword(password);
   };
+
   const updateRecord = (record_id) => {
+    if (siteName == "" || username == "") {
+      showPopupMessage(
+        "SiteName & UserName are  required field !",
+        "error",
+        true
+      );
+      return;
+    }
+    if (!validator.isURL(inputSiteUrl)) {
+      showPopupMessage("Url is badly formated  !", "error", true);
+      return;
+    }
+
     db.collection("credentials")
       .doc(record_id)
       .set({
         siteName: inputSiteName,
+        siteUrl: inputSiteUrl,
         userName: inputUserName,
         password: inputPassword,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -61,7 +86,12 @@ const Record = ({ showPopupMessage, id, siteName, username, password }) => {
   return (
     <>
       <div className='record'>
-        <span className='site_name'>{siteName}</span>
+        <span className='site_name'>
+          {" "}
+          <a href={siteUrl} target='_blank' rel='noopener noreferrer'>
+            {siteName}
+          </a>{" "}
+        </span>
         <div className='usercontainer'>
           <CopyToClipboard text={username}>
             <span>
@@ -140,6 +170,16 @@ const Record = ({ showPopupMessage, id, siteName, username, password }) => {
                     value={inputSiteName}
                     onChange={(e) => {
                       setSiteName(e.target.value);
+                    }}
+                    type='text'
+                  />
+                </div>
+                <div className='update_record_site_name'>
+                  <label htmlFor=''>SiteUrl</label>
+                  <input
+                    value={inputSiteUrl}
+                    onChange={(e) => {
+                      setSiteUrl(e.target.value);
                     }}
                     type='text'
                   />

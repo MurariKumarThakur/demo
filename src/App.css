@@ -1,9 +1,10 @@
 .recordContainer {
   display: flex;
-  justify-content: center;
 
+  justify-content: center;
+  height:70vh;
   flex-wrap: wrap;
-  height: 75vh;
+ 
   overflow-y: auto;
   scroll-behavior: smooth;
 }
@@ -16,4 +17,8 @@
 }
 .message_alert{
   height: 50px;
+}
+.alert_message{
+  height: 30px;
+  margin-top:100px;
 }

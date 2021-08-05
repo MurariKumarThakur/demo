@@ -7,10 +7,15 @@ import {Container,Button} from "@material-ui/core"
 import { db } from './firebase';
 import firebase from 'firebase';
 import  Alert from '@material-ui/lab/Alert';
+import AddIcon from '@material-ui/icons/Add';
+import SearchIcon from '@material-ui/icons/Search';
+import validator from 'validator';
+
 const SecondHeader = ({ showPopupMessage,updateSearchedResult,user}) => {
     const [searchInput,setSearchedInput]=useState("")
     const [addNewPopupOpen,setAddNewPopup]=useState(false)
     const [siteName,setSiteName]=useState("")
+    const [siteUrl,setSiteUrl]=useState("")
     const [userName,setUserName]=useState("")
     const [password,setPassword]=useState("")
     const handleChange=(e)=>{
@@ -26,6 +31,7 @@ const SecondHeader = ({ showPopupMessage,updateSearchedResult,user}) => {
     }
    const clearInput=()=>{
     setSiteName("")
+    setSiteUrl("")
     setUserName("")
     setPassword("")
     }
@@ -39,11 +45,15 @@ const SecondHeader = ({ showPopupMessage,updateSearchedResult,user}) => {
             showPopupMessage("SiteName & UserName are  required field !","error",true)
             return;
         }
-
+        if(!validator.isURL(siteUrl)){
+          showPopupMessage("Url is badly formated  !","error",true)
+          return;
+        }
 
          db.collection('credentials').doc(user?.uid+"_"+ new Date().getTime()).set({
             
              siteName:siteName,
+             siteUrl:siteUrl,
              userName:userName,
              password:password,
              timestamp:firebase.firestore.FieldValue.serverTimestamp()
@@ -62,13 +72,13 @@ const SecondHeader = ({ showPopupMessage,updateSearchedResult,user}) => {
          
         <div className='sec_header'>
             <div className="searchbox">
-             <label >Search : </label>   
+             <label > <SearchIcon/></label>   
             <input value={searchInput} type="text" placeholder="Search By  Site Name"  onChange={handleChange} />
              {searchInput? <Button variant="contained" color="default" onClick={()=>(setSearchedInput(""), updateSearchedResult(""))}>Clear</Button>:""}
             </div>
             
              
-             <Button variant="contained" color="default" onClick={openAddNewRecordPopup}> Add New Record </Button> 
+             <Button variant="contained" color="default" onClick={openAddNewRecordPopup}><AddIcon/> Add New Record </Button> 
 
         </div>
             <div className="addnewRecod">
@@ -83,6 +93,10 @@ const SecondHeader = ({ showPopupMessage,updateSearchedResult,user}) => {
                   <div className="add_new_record_site_name">
                   <label htmlFor="">SiteName</label>
                   <input onChange={(e)=>{setSiteName(e.target.value)}} type="text" />
+                  </div>
+                  <div className="add_new_record_site_name">
+                  <label htmlFor="">SiteUrl</label>
+                  <input onChange={(e)=>{setSiteUrl(e.target.value)}} type="text" />
                   </div>
                   <div className="add_new_record_username">
                   <label htmlFor="">Username</label>

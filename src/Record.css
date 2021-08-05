@@ -84,3 +84,7 @@
   justify-content: space-evenly;
   
 }
+.site_name a{
+  text-decoration: none;
+  color:white;
+}
